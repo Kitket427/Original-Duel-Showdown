@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class HitpointSystem : MonoBehaviour, IDamageable
 {
     [SerializeField] private SpriteRenderer[] sprites;
@@ -16,6 +17,9 @@ public class HitpointSystem : MonoBehaviour, IDamageable
     public bool half;
     [Header("ForBosses")]
     [SerializeField] private FireSystem[] bossesUpgrate;
+    [SerializeField] private SceneRestart restart;
+    [SerializeField] private GameObject trigger;
+    [SerializeField] private CameraRotate cam;
     private void Start()
     {
         sfx = GetComponent<AudioSource>();
@@ -30,6 +34,7 @@ public class HitpointSystem : MonoBehaviour, IDamageable
     }
     void TakeDamage(int damage)
     {
+        if (cam) cam.Rotate(damage);
         if(timeManager && boss == false)
         {
             timeManager.GetDamage(0);
@@ -105,6 +110,8 @@ public class HitpointSystem : MonoBehaviour, IDamageable
         }
         if (spawnerCount) spawnerCount.Counting();
         Instantiate(effect, transform.position, transform.rotation);
-        Destroy(gameObject);
+        if (restart) restart.GameOver();
+        if (trigger) trigger.SetActive(true);
+        gameObject.SetActive(false);
     }
 }

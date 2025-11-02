@@ -28,4 +28,8 @@ public class PenguinRandomFly : MonoBehaviour
     {
         Instantiate(effect, transform.position - new Vector3(0,2,0), transform.rotation);
     }
+    private void OnDisable()
+    {
+        CancelInvoke();
+    }
 }

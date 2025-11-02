@@ -84,7 +84,7 @@ public class TimeManager : MonoBehaviour
     public void GetDamage(float slow)
     {
         if (slow == 0 && Time.timeScale > sliders[0].value) Time.timeScale = sliders[0].value;
-        else if (Time.timeScale > slow) Time.timeScale = slow;
+        else if (Time.timeScale > 0.1f) Time.timeScale = 0.1f;
         PlayerPrefs.SetFloat("Slow", sliders[0].value);
     }
 }

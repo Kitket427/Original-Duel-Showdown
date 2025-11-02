@@ -31,7 +31,7 @@ public class Bullet : MonoBehaviour
     }
     void Dead()
     {
-        Instantiate(effect, transform.position, transform.rotation);
+        if(effect)Instantiate(effect, transform.position, transform.rotation);
         Destroy(gameObject);
     }
     private void OnTriggerEnter2D(Collider2D collision)

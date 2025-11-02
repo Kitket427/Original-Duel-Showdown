@@ -11,7 +11,7 @@ public class EnemyPos : MonoBehaviour
     }
     void Update()
     {
-        if (player.position.x < transform.position.x) transform.rotation = Quaternion.Euler(0, 180, 0);
-        else transform.rotation = Quaternion.Euler(0, 0, 0);
+        if (player && player.position.x < transform.position.x) transform.rotation = Quaternion.Euler(0, 180, 0);
+        else if(player) transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 }
